@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         goButton = findViewById(R.id.goButton)
         goButton.apply {
             setOnClickListener {
-                webView.loadUrl(urlEditText.text.toString())
+                var text = urlEditText.text.toString()
+                text = parseUrl(text)
+                webView.loadUrl(text)
             }
         }
         webView = findViewById(R.id.webView)
@@ -37,4 +39,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+}
+
+fun parseUrl(url : String) : String{
+    if(url.startsWith("https://")) return url
+    else return "https://$url"
 }
